@@ -1,5 +1,7 @@
 # Introduction
 
+This section covers the basics of using `radare2`: finding the help pages for each module, the basic command format for each command, and using expressions.
+
 ## Help Commands
 
 I don't think there exists anyone that knows every `radare2` command by heart. Thankfully, `radare2` has a well-built help system.
@@ -70,7 +72,7 @@ When using the `grep` command, you can `grep` for either rows or columns.  Use `
             0xf7f148a0      89e0           mov eax, esp
 ```
 
-## Expressions: The `?` Module
+## Expressions: The ? Module
 
 Expressions are prepended with the `?` command.  This module handles the evaluation of expressions and other miscellaneous features.  We will cover the most common uses of the `?` module.
 
@@ -135,7 +137,7 @@ ternary 0t10
 [stack] esp stack R W X 'add dword [eax], eax' '[stack]'
 ```
 
-## Shell Commands: The `!` Module
+## Shell Commands: The ! Module
 
 You can use shell commands inside `radare2` using the `!` module.  The `!` command is used to execute commands.
 

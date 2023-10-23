@@ -1,4 +1,4 @@
-# Information: The `i` Module
+# Information: The i Module
 
 We use the `i` module to print out information from the binary. There are several submodules in this binary with various functionality; we will only cover the most important and commonly-used ones.
 
