@@ -17,7 +17,7 @@ As we are navigating the output, scanning through instructions and the stack, we
 The best way to return to the instruction pointer is to use `s eip`. If you are in visual mode, the `.` command also returns the display to the instruction pointer.
 
 {% hint style="info" %}
-More information on visual mode can be found [here](modes/visual-mode/).
+More information on visual mode can be found [here](modes/visual/).
 {% endhint %}
 
 ## Stepping
@@ -112,3 +112,5 @@ When a binary forks, it creates a new process. This is useful for creating child
 This can be done in `radare2` by deciding at the time of the fork. Use `dcf` to continue execution until the next fork. Once here, consult the `dp` submodule to handle processing commands.
 
 The `dp` submodule is used to list and manage processes. Use `dp` to list the current processes. Use `dp <num>` to switch to a process. Use `dp-` to kill the current process.
+
+## Reopening Files: The `o` Module

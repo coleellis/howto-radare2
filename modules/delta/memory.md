@@ -1,6 +1,6 @@
 # Memory Analysis
 
-### Viewing Registers
+## Viewing Registers
 
 Use the `dr` submodule to get more information about the registers.
 
@@ -23,7 +23,7 @@ eflags = 0x00000246
 oeax = 0xffffffff
 ```
 
-### Viewing Memory Segments
+## Viewing Memory Segments
 
 Use the `dm` submodule to get more information about the memory segments.
 
@@ -64,3 +64,4 @@ We can use the `dm.` command to find the memory segment of a specific address. I
 
 This submodule provides several commands to allocate, deallocate, and map virtual memory. I don't have any writeups using the write flag, but in the future, I might make this addition.
 
+## Heap Analysis

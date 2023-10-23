@@ -1,56 +1,42 @@
 # Introduction
 
-## Seeking
+## Help Commands
 
-We use **seeking** to handle where we are looking in the binary at some time. `radare2` maintains a **seek address** to determine where we are in the binary. This is shown on the command line:
+I don't think there exists anyone that knows every `radare2` command by heart. Thankfully, `radare2` has a well-built help system.
 
-```nasm
-[0x0804923c]> 
-```
+The question mark command (`?`) is used for accessing the help pages.
 
-In this case, `0x0804923c` is our seek address. We can use the `s` command to change the seek address:
+This can be combined with the modules to provide information on the available submodules and the commands inside each module.  For example, if we want information on the debugger module (`d`), we can use `d?` to access the help page for the debugger module:
 
 ```nasm
-[0x0804923c]> s 0x0
-[0x00000000]> 
+[0xf7f518a0]> d?
+Usage: d   # Debug commands
+| d:[?] [cmd]              run custom debug plugin command
+| db[?]                    breakpoints commands
+| dbt[?]                   display backtrace based on dbg.btdepth and dbg.btalgo
+| dc[?]                    continue execution
+| dd[?][*+-tsdfrw]         manage file descriptors for child process
+| de[-sc] [perm] [rm] [e]  debug with ESIL (see de?)
+| dg <file>                generate a core-file (WIP)
+| dh [plugin-name]         select a new debug handler plugin (see dbh)
+| dH [handler]             transplant process to a new handler
+| di[?]                    show debugger backend information (See dh)
+| dk[?]                    list, send, get, set, signal handlers of child
+| dL[?]                    list or set debugger handler
+| dm[?]                    show memory maps
+| do[?]                    open process (reload, alias for 'oo')
+| doo[args]                reopen in debug mode with args (alias for 'ood')
+| doof[file]               reopen in debug mode from file (alias for 'oodf')
+| doc                      close debug session
+| dp[?]                    list, attach to process or thread id
+| dr[?]                    cpu registers
+| ds[?]                    step, over, source line
+| dt[?]                    display instruction traces
+| dw <pid>                 block prompt until pid dies
+| dx[?][aers]              execute code in the child process
+| date [-b]                use -b for beat time
 ```
 
-When using various modules within `radare2`, the program defaults to our seek address when an address is requested. For example, if we use the `pdf` command, it will print the disassembly of the function at the seek address:
+## Basic Command Format
 
-```nasm
-[0x00000000]> s main
-[0x0804923c]> pdf
-            ;-- eax:
-            ;-- eip:
-            ; DATA XREFS from entry0 @ 0x80490b0(r), 0x80490b6(w)
-┌ 24: int main (int argc, char **argv, char **envp);
-│           0x0804923c b    55             push ebp
-│           0x0804923d      89e5           mov ebp, esp
-│           0x0804923f      83e4f0         and esp, 0xfffffff0
-│           0x08049242      e80d000000     call sym.__x86.get_pc_thunk.ax
-│           0x08049247      05b92d0000     add eax, 0x2db9
-│           0x0804924c      e89effffff     call sym.read_in
-│           0x08049251      90             nop
-│           0x08049252      c9             leave
-└           0x08049253      c3             ret
-```
-
-However, we can use the `@` symbol to specify a different address:
-
-```nasm
-[0x0804923c]> s 0
-[0x00000000]> pdf @ main
-            ;-- eax:
-            ;-- eip:
-            ; DATA XREFS from entry0 @ 0x80490b0(r), 0x80490b6(w)
-┌ 24: int main (int argc, char **argv, char **envp);
-│           0x0804923c b    55             push ebp
-│           0x0804923d      89e5           mov ebp, esp
-│           0x0804923f      83e4f0         and esp, 0xfffffff0
-│           0x08049242      e80d000000     call sym.__x86.get_pc_thunk.ax
-│           0x08049247      05b92d0000     add eax, 0x2db9
-│           0x0804924c      e89effffff     call sym.read_in
-│           0x08049251      90             nop
-│           0x08049252      c9             leave
-└           0x08049253      c3             ret
-```
+## Expressions

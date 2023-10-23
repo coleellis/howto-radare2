@@ -1,6 +1,6 @@
 # Functions
 
-### Listing Functions
+## Listing Functions
 
 Use the `afl` command to list the available functions. The `afll` command provides the list of available commands in verbose mode.
 
@@ -90,3 +90,9 @@ sym.read_in:
 sym._init:
     sym.__x86.get_pc_thunk.bx
 ```
+
+## Calling Conventions
+
+## Virtual Tables
+
+## System Calls

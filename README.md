@@ -41,4 +41,11 @@ r2 -d -A <binary>
 
 We use the `-d` and `-A` flags to speed our development process by preemptively analyzing the binary. You can open a binary without these flags (with `radare2 <binary>`); however, you will need to run the analysis commands yourself.
 
-## Before We Begin
+## Coming Soon
+
+These are some topics that I plan to cover in the future:
+
+* [ ] Writing to File: The `w` Module
+* [ ] Scripting with Radare2
+* [ ] Remote Connections
+* [ ] Radare2 Plugins

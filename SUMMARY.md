@@ -5,19 +5,22 @@
 
 ## Radare2 Modules
 
-* [Binary Info: The `i` Module](modules/india-mod/README.md)
-    * [File Information](modules/india-mod/info.md)
-    * [Imports and Exports](modules/india-mod/imports-exports.md)
-    * [Checking Security](modules/india-mod/security.md)
-    * [Symbols and Strings](modules/india-mod/symbols.md)
-* [Analysis: The `a` Module](modules/alpha-mod/README.md)
-    * [Cross-References](modules/alpha-mod/xrefs.md)
-    * [Functions](modules/alpha-mod/functions.md)
-* [Debugging: The `d` Module](modules/delta-mod/README.md)
-    * [Breakpoints](modules/delta-mod/breakpoints.md)
-    * [Memory](modules/delta-mod/memory.md)
-    * [Running the Binary](modules/delta-mod/running.md)
-* [Printing: The `p` Module](modules/papa-mod/README.md)
+* [Seeking: The `s` Module](modules/sierra/README.md)
+* [Editing Configuration: The `e` Module](modules/echo/README.mdq)
+* [Binary Info: The `i` Module](modules/india/README.md)
+    * [File Information](modules/india/info.md)
+    * [Imports and Exports](modules/india/imports-exports.md)
+    * [Checking Security](modules/india/security.md)
+    * [Symbols and Strings](modules/india/symbols.md)
+* [Analysis: The `a` Module](modules/alpha/README.md)
+    * [Cross-References](modules/alpha/xrefs.md)
+    * [Functions](modules/alpha/functions.md)
+    * [Variables](modules/alpha/variables.md)
+* [Debugging: The `d` Module](modules/delta/README.md)
+    * [Breakpoints](modules/delta/breakpoints.md)
+    * [Memory](modules/delta/memory.md)
+    * [Running the Binary](modules/delta/running.md)
+* [Printing: The `p` Module](modules/papa/README.md)
 
 ## The Radare2 Suite
 
@@ -27,5 +30,7 @@
 
 ## Display Modes
 
-* [Visual Mode](modes/visual-mode/README.md)
-* [Graph Mode](modes/graph-mode/README.md)
+* [Visual Mode](modes/visual/README.md)
+    * [Visual Disassembly](modes/visual/disassembly.md)
+    * [Visual Panels](modes/visual/panels.md)
+* [Graph Mode](modes/graph/README.md)
