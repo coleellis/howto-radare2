@@ -8,7 +8,7 @@ I don't think there exists anyone that knows every `radare2` command by heart. T
 
 The question mark command (`?`) is used for accessing the help pages.
 
-This can be combined with the modules to provide information on the available submodules and the commands inside each module.  For example, if we want information on the debugger module (`d`), we can use `d?` to access the help page for the debugger module:
+This can be combined with the modules to provide information on the available submodules and the commands inside each module. For example, if we want information on the debugger module (`d`), we can use `d?` to access the help page for the debugger module:
 
 ```nasm
 [0xf7f518a0]> d?
@@ -41,7 +41,8 @@ Usage: d   # Debug commands
 
 ## Basic Command Format
 
-Commands in `radare2` are organized into **modules**.  The official documentation marks the format of a `radare2` command as:
+Commands in `radare2` are organized into **modules**. The official documentation marks the format of a `radare2` command as:
+
 ```
 Usage: [.][times][cmd][~grep][@[@iter]addr!size][|>pipe] ; ...
 
@@ -50,6 +51,7 @@ Prefix with number to repeat command N times (f.ex: 3x)
 ```
 
 Here are some examples of some commands that are commonly used:
+
 ```nasm
 ds                      ; debugger module -- step in
 pd 1                    ; print 1 line of disassembly
@@ -58,9 +60,9 @@ is~OBJ                  ; equiv. is | grep OBJ -- find variables
 px 20 ; pd 3 ; px 40    ; multiple commands in one line
 ```
 
-Most commands offer autocompletion using the `Tab` key.  To extend autocompletion, use the `!!!` submodule command.
+Most commands offer autocompletion using the `Tab` key. To extend autocompletion, use the `!!!` submodule command.
 
-When using the `grep` command, you can `grep` for either rows or columns.  Use `:` for rows and `[]` for columns.
+When using the `grep` command, you can `grep` for either rows or columns. Use `:` for rows and `[]` for columns.
 
 ```nasm
 [0xf7f148a0]> pd 1          ; output for pd 1 (for reference)
@@ -74,7 +76,7 @@ When using the `grep` command, you can `grep` for either rows or columns.  Use `
 
 ## Expressions: The ? Module
 
-Expressions are prepended with the `?` command.  This module handles the evaluation of expressions and other miscellaneous features.  We will cover the most common uses of the `?` module.
+Expressions are prepended with the `?` command. This module handles the evaluation of expressions and other miscellaneous features. We will cover the most common uses of the `?` module.
 
 {% hint style="info" %}
 To access the help pages for the `?` module, use `???`.
@@ -82,12 +84,14 @@ To access the help pages for the `?` module, use `???`.
 
 ### Evaluating Expressions
 
-The `?v` submodule is responsible for viewing the output of expressions.  There are three formats for viewing the output of expressions:
+The `?v` submodule is responsible for viewing the output of expressions. There are three formats for viewing the output of expressions:
+
 * `?v` - View the output of the expression in hexadecimal.
 * `?vi` - View the output of the expression in decimal.
 * `?vx` - View the output of the expression in 8-byte padded hexadecimal.
 
 To understand the outputs, let's look at the same expression for each output:
+
 ```nasm
 [0xf7f148a0]> ?v 1+2
 0x3
@@ -100,9 +104,10 @@ To understand the outputs, let's look at the same expression for each output:
 The supported arithmetic operations are addition (`+`), subtraction (`-`), multiplication (`*`), division (`/`), modulus (`%`), shifting (`<<` and `>>`), and bitwise operations (`&`, `|`, and `^`).
 
 {% hint style="warning" %}
-### Binary OR
+#### Binary OR
 
 To use binary OR, quote the entire expression to avoid executing the `|` pipe operator.
+
 ```nasm
 [0xf7f148a0]> "?vi 1 | 2"
 3
@@ -110,6 +115,7 @@ To use binary OR, quote the entire expression to avoid executing the `|` pipe op
 {% endhint %}
 
 You can use the raw `?` operator to get the output in several forms.
+
 ```nasm
 [0xf7f148a0]> ? 1+2
 int32   3
@@ -128,7 +134,8 @@ ternary 0t10
 ```
 
 ### What-Is
-`?w` is used for determing what is at an address.  We can use this to determine if the address is an instruction or data, and the permissions of that address.
+
+`?w` is used for determining what is at an address. We can use this to determine if the address is an instruction or data and the permissions of that address.
 
 ```nasm
 [0xf7f148a0]> ?w main
@@ -139,7 +146,7 @@ ternary 0t10
 
 ## Shell Commands: The ! Module
 
-You can use shell commands inside `radare2` using the `!` module.  The `!` command is used to execute commands.
+You can use shell commands inside `radare2` using the `!` module. The `!` command is used to execute commands.
 
 ```nasm
 [0xf7f148a0]> !cat flag.txt
@@ -148,7 +155,7 @@ cat: flag.txt: No such file or directory
 Mon Oct 23 06:28:20 PM EDT 2023
 ```
 
-`grep` can be used in combination with shell commands.  However, two exclamations must be used.
+`grep` can be used in combination with shell commands. However, two exclamations must be used.
 
 ```nasm
 [0xf7f148a0]> !!ls -l~README
