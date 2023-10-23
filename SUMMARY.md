@@ -1,6 +1,7 @@
 # Table of contents
 
 * [How-To: Radare2](README.md)
+* [Introduction](introduction.md)
 
 ## Binary Information: The i Module
 

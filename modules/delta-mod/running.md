@@ -1,60 +1,4 @@
----
-description: Breakpoints, Watchpoints, Stack Traces, oh my!
----
-
-# Stepping and Continuing
-
-This section is known as **dynamic analysis**. Dynamic analysis is actively running the binary and observing its behavior. This is done by watching the registers, the stack, and the instructions as they are executed.
-
-In `radare2`, dynamic analysis is done in **debug mode**. We can enter debug mode by using the `-d` flag when opening a binary. Debug commands are contained in the _Debugging_ (`d`) module. We can use `d?` to see the available commands.
-
-## Using Breakpoints
-
-The `db` submodule is responsible for breakpoints. This module allows you to create, delete, and manage breakpoints. We can use `db?` to see the available commands.
-
-You set breakpoints using `db` plus the address or symbol. The argument can also be a symbol plus an offset, which `radare2` will resolve to its proper address. Here are some examples of setting breakpoints:
-
-```nasm
-[0xf7f8d8a0]> db main
-[0xf7f8d8a0]> db sym.read_in+8
-[0xf7f8d8a0]> db 0x080491e2
-```
-
-Use `db` to view the breakpoint list. You can use `dbi` to list the breakpoints by index; however, this only shows their address, not their name.
-
-```nasm
-0x0804923c - 0x0804923d 1 --x sw break enabled valid cmd="" cond="" name="main" module="/home/joybuzzer/args"
-0x080491f7 - 0x080491f8 1 --x sw break enabled valid cmd="" cond="" name="sym.read_in+8" module="/home/joybuzzer/args"
-0x080491e2 - 0x080491e3 1 --x sw break enabled valid cmd="" cond="" name="0x080491e2" module="/home/joybuzzer/args"
-```
-
-To remove a breakpoint, use `db -<name>` or `db -<address>`. You can use `dbi -<index>` to remove a breakpoint by its index.
-
-```nasm
-[0xf7f8d8a0]> db -main
-[0xf7f8d8a0]> dbi -2
-```
-
-Use the `dbe` and `dbd` commands to enable and disable breakpoints, respectively. The `dbie` and `dbid` commands work the same way, using indices for their arguments.
-
-```nasm
-[0xf7f8d8a0]> dbe main
-[0xf7f8d8a0]> dbd main
-[0xf7f8d8a0]> dbie 1
-[0xf7f8d8a0]> dbid 1
-```
-
-### Setting Watchpoints
-
-Watchpoints are breakpoints that are triggered when a specific memory address is accessed. This is useful for detecting when a variable is changed. We can use `dbw` to set a watchpoint. This takes two arguments: the address to watch and the watch flags (read, write, or both).
-
-```nasm
-[0xf7f8d8a0]> dbw 0x0804a000 rw
-```
-
-The list of watchpoints is stored in `db` with the breakpoints.
-
-## Running the Binary
+# Running the Binary
 
 Upon opening `radare2`, the binary is already running. `radare2` defaults to the entry point of the binary (listed in `rabin2`'s output) and puts a temporary breakpoint at that location. This is often inconvenient for us since we don't care much about this compiler-generated code. We can set our own breakpoint at the `main` function and then continue execution there.
 
@@ -66,7 +10,7 @@ Use `dc` to continue execution to the next breakpoint.
 INFO: hit breakpoint at: 0x804923c
 ```
 
-### Returning to the Instruction Pointer
+## Returning to the Instruction Pointer
 
 As we are navigating the output, scanning through instructions and the stack, we might lose the place of the instruction pointer. An important note in `radare2` is that **the seek address is not the same as the instruction pointer**. This causes confusion with new users as they attempt to understand where they are in the binary.
 
@@ -89,7 +33,7 @@ To step in, use the `ds` instruction. To step over, use the `dso` instruction. Y
 These instructions are different in visual mode. In visual mode, `s` is for stepping in and `S` is for stepping over.
 {% endhint %}
 
-## Continue
+## Continuing
 
 You can use the `dc` command to continue execution until the next breakpoint or watchpoint is hit.
 
