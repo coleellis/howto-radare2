@@ -1,6 +1,6 @@
-# Seeking: The `s` Module
+# Seeking: The s Module
 
-**Seeking** is the process of moving around the file.  `radare2` maintains a **seek address** to determine where we are in the binary.  This is shown on the command line:
+**Seeking** is the process of moving around the file. `radare2` maintains a **seek address** to determine where we are in the binary. This is shown on the command line:
 
 ```nasm
 [0x0804923c]> 
@@ -18,14 +18,17 @@ We can use the `s` command to change the seek address:
 ```
 
 You can seek to an expression such as an address, offset, or register.
+
 ```nasm
 [0x080491f0]> s esp
 [0xffbd7d40]> 
 ```
+
 ```nasm
 [0x080491f3]> s main
 [0x0804923c]> 
 ```
+
 ```nasm
 [0xffbd7d40]> s sym.read_in + 4
 [0x080491f3]> 
@@ -33,7 +36,7 @@ You can seek to an expression such as an address, offset, or register.
 
 ## Seek History
 
-We use `s` to print the seeking history. This takes a number of secondary parameters of how the data should be printed.  Scroll through the following to see the various types:
+We use `s` to print the seeking history. This takes several secondary parameters of how the data should be printed. Scroll through the following to see the various types:
 
 {% tabs %}
 {% tab title="JSON" %}
@@ -78,12 +81,14 @@ If we want to undo the seek, we can use `s-` to go back to the previous seek add
 ```
 
 We can then redo this seek using `s+`:
+
 ```nasm
 [0x0804923c]> s+
 [0x00000000]> 
 ```
 
 We can clear the seek history using `s-*`:
+
 ```nasm
 [0x00000000]> s-*
 ```
@@ -91,40 +96,46 @@ We can clear the seek history using `s-*`:
 ## Relative Seeking
 
 We can use `s+ <bytes>` to move `<bytes>` forward.
+
 ```nasm
 [0x00000000]> s+ 4
 [0x00000004]> 
 ```
 
 We can use `s- <bytes>` to move `<bytes>` backward.
+
 ```nasm
 [0x00000004]> s- 4
 [0x00000000]> 
 ```
 
 We can use `s++ <blocks>` to move `<blocks>` forward.
+
 ```nasm
 [0x00000000]> s++ 1
 [0x00000100]> 
 ```
 
 We can use `s-- <blocks>` to move `<blocks>` backward.
+
 ```nasm
 [0x00000100]> s-- 1
 [0x00000000]> 
 ```
 
 {% hint style="info" %}
-### How Many Bytes in a Block?
-This depends on your configuration.  Use `b` to get the current block size.  `b <num>` is used to set the current blocksize.
+#### How Many Bytes in a Block?
+
+This depends on your configuration. Use `b` to get the current block size. `b <num>` is used to set the current block size.
 {% endhint %}
 
 ## Seeking to Special Locations
-Radare2 gives us the option to seek to various special locations in the binary.  This is a good way to find the start of functions, strings, and comments without bloating the output.
+
+Radare2 allows us to seek to various special locations in the binary. This is a good way to find the start of functions, strings, and comments without bloating the output.
 
 ### Seeking to Functions
 
-The `sf` command lets us seek to the start of the *next* function. 
+The `sf` command lets us seek to the start of the _next_ function.
 
 ```nasm
 [0x08049240]> s sym.read_in
@@ -138,7 +149,8 @@ The `sf` command lets us seek to the start of the *next* function.
 │           0x0804923c      55             push ebp
 ```
 
-We can use `sf.` to seek to the *beginning of the current* function. 
+We can use `sf.` to seek to the _beginning of the current_ function.
+
 ```nasm
 [0x08049246]> sf.
 [0x0804923c]> pd 1
@@ -151,13 +163,13 @@ We can use `sf.` to seek to the *beginning of the current* function.
 ```
 
 {% hint style="info" %}
-`pd 1` is used to print one line of disassembly at the current seek address.  We use this to show that we're at the top of the `main` function.
+`pd 1` is used to print one line of disassembly at the current seek address. We use this to show that we're at the top of the `main` function.
 {% endhint %}
 
-You can use `sf <function>` to seek to a specific function.  However, since `s <function>` also takes us to a function, this is not very useful.
+You can use `sf <function>` to seek to a specific function. However, since `s <function>` also takes us to a function, this function is not very useful.
 
 ```nasm
-[0x0804923c]> s sym.read_in
+[0x0804923c]> sf sym.read_in
 [0x080491ef]>
 ```
 
@@ -175,9 +187,10 @@ Searching 4 bytes in [0x804a000-0x804b000]
 ```
 
 {% hint style="danger" %}
-### Search Bounds
+#### Search Bounds
 
-Radare2 defaults to searching the current memory block for the string.  We can change this setting by modifying the `e search.in` setting.
+Radare2 defaults to searching the current memory block for the string. We can change this setting by modifying the `e search.in` setting.
+
 ```nasm
 [0x0804923c]> e search.in = dbg.maps
 ```
@@ -186,6 +199,7 @@ Changing this will cause `s/` to search the entire binary for the string.
 {% endhint %}
 
 We can also search for bytes by using `s/x` and specifying the hex value.
+
 ```nasm
 [0x080491ef]> s/x 89e5
 Searching 2 bytes in [0x80491f0-0x804a000]
