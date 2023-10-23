@@ -39,13 +39,6 @@ You can seek to an expression such as an address, offset, or register.
 We use `s` to print the seeking history. This takes several secondary parameters of how the data should be printed. Scroll through the following to see the various types:
 
 {% tabs %}
-{% tab title="JSON" %}
-```nasm
-[0x08049240]> sj
-[{"offset":134517231,"name":"sym.read_in"},{"offset":134512640,"name":"segment.LOAD0"},{"offset":134517308,"name":"main"},{"offset":134517312,"name":"main+4","current":true}]
-```
-{% endtab %}
-
 {% tab title="Verbose" %}
 ```nasm
 [0x08049240]> s*
@@ -69,6 +62,13 @@ f undo_0 @ 0x804923c
 0x8048000 segment.LOAD0
 0x804923c main
 0x8049240 main + 4
+```
+{% endtab %}
+
+{% tab title="JSON" %}
+```nasm
+[0x08049240]> sj
+[{"offset":134517231,"name":"sym.read_in"},{"offset":134512640,"name":"segment.LOAD0"},{"offset":134517308,"name":"main"},{"offset":134517312,"name":"main+4","current":true}]
 ```
 {% endtab %}
 {% endtabs %}
