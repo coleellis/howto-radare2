@@ -12,7 +12,7 @@
     * [Imports and Exports](modules/india/imports-exports.md)
     * [Checking Security](modules/india/security.md)
     * [Symbols and Strings](modules/india/symbols.md)
-* [Analysis: The `a` Module](modules/alpha/README.md)
+* [Static Analysis: The `a` Module](modules/alpha/README.md)
     * [Cross-References](modules/alpha/xrefs.md)
     * [Functions](modules/alpha/functions.md)
     * [Variables](modules/alpha/variables.md)
@@ -22,15 +22,15 @@
     * [Running the Binary](modules/delta/running.md)
 * [Printing: The `p` Module](modules/papa/README.md)
 
-## The Radare2 Suite
-
-* [Rabin2: File Analysis](suite/rabin2.md)
-* [Ragg2: Code Generation](suite/ragg2.md)
-* [Rafind2: Pattern Matching](suite/rafind2.md)
-
 ## Display Modes
 
 * [Visual Mode](modes/visual/README.md)
     * [Visual Disassembly](modes/visual/disassembly.md)
     * [Visual Panels](modes/visual/panels.md)
 * [Graph Mode](modes/graph/README.md)
+
+## The Radare2 Suite
+
+* [Rabin2: File Analysis](suite/rabin2.md)
+* [Ragg2: Code Generation](suite/ragg2.md)
+* [Rafind2: Pattern Matching](suite/rafind2.md)

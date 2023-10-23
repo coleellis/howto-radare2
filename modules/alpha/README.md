@@ -1,4 +1,4 @@
-# Analysis: The `a` Module
+# Static Analysis: The `a` Module
 
 ## Overview
 If you don't use flags to open the file, you will need to tell `radare2` to analyze the binary. There are multiple levels of analysis listed under the `aa` submodule:

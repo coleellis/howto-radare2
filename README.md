@@ -49,3 +49,4 @@ These are some topics that I plan to cover in the future:
 * [ ] Scripting with Radare2
 * [ ] Remote Connections
 * [ ] Radare2 Plugins
+* [ ] Complete the Radare2 Suite (rasm2, radiff2, ...)
