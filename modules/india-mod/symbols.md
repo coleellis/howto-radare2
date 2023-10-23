@@ -1,4 +1,4 @@
-# Strings and Symbols
+# Symbols and Strings
 
 ### Strings
 

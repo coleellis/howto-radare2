@@ -6,21 +6,27 @@
 ## Binary Information: The i Module
 
 * [Binary Information](modules/india-mod/README.md)
-* [Static Analysis](static-analysis.md)
+* [File Information](modules/india-mod/info.md)
+* [Imports and Exports](modules/india-mod/imports-exports.md)
+* [Checking Security](modules/india-mod/security.md)
+* [Symbols and Strings](modules/india-mod/symbols.md)
 
 ## Analysis: The a Module
 
 * [Analysis](modules/alpha-mod/README.md)
+* [Cross-References](modules/alpha-mod/xrefs.md)
+* [Functions](modules/alpha-mod/functions.md)
 
 ## Debugging: The d Module
 
 * [Debugging](modules/delta-mod/README.md)
-* [Stepping and Continuing](stepping.md)
+* [Breakpoints](modules/delta-mod/breakpoints.md)
+* [Memory](modules/delta-mod/memory.md)
+* [Running the Binary](modules/delta-mod/running.md)
 
 ## Printing: The p Module
 
 * [Printing](modules/papa-mod/README.md)
-* [Viewing Data](viewing-data.md)
 
 ## The Radare2 Suite
 
