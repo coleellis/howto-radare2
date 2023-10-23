@@ -4,11 +4,12 @@ description: Pre-running analysis of a binary.
 
 # Static Analysis
 
-This section will cover the preliminary analysis of the bianry before debugging it. This includes finding functions and their cross-references, understanding imports and exports, dissecting strings and symbols, and more. 
+This section will cover the preliminary analysis of the binary before debugging it. This includes finding functions and their cross-references, understanding imports and exports, dissecting strings and symbols, and more.
 
 ## First Steps
 
-If you don't use flags to open the file, you will need to tell `radare2` to analyze the binary.  There are multiple  levels of analysis listed under the `aa` submodule:
+If you don't use flags to open the file, you will need to tell `radare2` to analyze the binary. There are multiple levels of analysis listed under the `aa` submodule:
+
 ```nasm
 [0x0804923c]> aaa?
 Usage: aa[a[a[a]]]   # automatically analyze the whole program
@@ -19,21 +20,25 @@ Usage: aa[a[a[a]]]   # automatically analyze the whole program
 | aaaaa  refine the analysis to find more functions after aaaa
 ```
 
-In almost all scenarios, `aaa` is more than plenty.  By using the `-A` flag, `aaa` is automatically executed.
+In almost all scenarios, `aaa` is more than plenty. By using the `-A` flag, `aaa` is automatically executed.
 
 ## Seeking
-We use **seeking** to handle where we are looking in the binary at some time.  `radare2` maintains a **seek address** that is used to determine where we are in the binary.  This is shown on the command line:
+
+We use **seeking** to handle where we are looking in the binary at some time. `radare2` maintains a **seek address** to determine where we are in the binary. This is shown on the command line:
+
 ```nasm
 [0x0804923c]> 
 ```
 
-In this case, `0x0804923c` is our seek address.  We can use the `s` command to change the seek address:
+In this case, `0x0804923c` is our seek address. We can use the `s` command to change the seek address:
+
 ```nasm
 [0x0804923c]> s 0x0
 [0x00000000]> 
 ```
 
-When using various modules within `radare2`, the program defaults to our seek address when an address is requested.  For example, if we use the `pdf` command, it will print the disassembly of the function at the seek address:
+When using various modules within `radare2`, the program defaults to our seek address when an address is requested. For example, if we use the `pdf` command, it will print the disassembly of the function at the seek address:
+
 ```nasm
 [0x00000000]> s main
 [0x0804923c]> pdf
@@ -53,6 +58,7 @@ When using various modules within `radare2`, the program defaults to our seek ad
 ```
 
 However, we can use the `@` symbol to specify a different address:
+
 ```nasm
 [0x0804923c]> s 0
 [0x00000000]> pdf @ main
@@ -72,10 +78,8 @@ However, we can use the `@` symbol to specify a different address:
 ```
 
 ## Cross-References (X-Refs)
-`axt` - Find X-Refs **to** a function
-`afx` - Analyze X-Refs **from** a function
-`axf` - 
-`axff` - Find X-Refs **from** a function
+
+`axt` - Find X-Refs **to** a function `afx` - Analyze X-Refs **from** a function `axf` - `axff` - Find X-Refs **from** a function
 
 {% tabs %}
 {% tab title="afx" %}
@@ -100,18 +104,19 @@ CODE 0x08049050 0x0804c010 reloc.fflush
 {% endtab %}
 {% endtabs %}
 
-
 ## Binary Information
+
 We use the `i` module to print out information from the binary. There are several submodules in this binary with various functionality; we will only cover the most important and commonly-used ones.
 
 {% hint style="info" %}
-Use `i?` to access the help page for the `i` module.  This shows all the submodules and their descriptions.
+Use `i?` to access the help page for the `i` module. This shows all the submodules and their descriptions.
 {% endhint %}
 
-Nearly all this information can be collected outside the binary using `rabin2`, a subpackage of `radare2`.  When applicable, these commands are also displayed.
+Nearly all this information can be collected outside the binary using `rabin2`, a subpackage of `radare2`. When applicable, these commands are also displayed.
 
 ### Checking Security
-You can use `iI` to get the summary information about the binary, which includes the security features.  
+
+You can use `iI` to get the summary information about the binary, which includes the security features.
 
 {% tabs %}
 {% tab title="iI" %}
@@ -186,13 +191,15 @@ va       true
 {% endtabs %}
 
 The most important security features listed here are:
+
 * `canary`
 * `pic` (and `baddr` if PIE is enabled)
 * `nx`
 * `relro`
 * `lang`, `endian`, `arch`, `bits`, and `os`
 
-Radare2 supports using pipes.  Therefore, you can pipe the output to `grep` to summarize the output.
+Radare2 supports using pipes. Therefore, you can pipe the output to `grep` to summarize the output.
+
 ```nasm
 $ rabin2 -I args | grep -E "canary|pic|nx|relro"
 canary   false
@@ -202,9 +209,11 @@ relro    partial
 ```
 
 ### Imports and Exports
-Imports and exports are important for understanding the libraries that are imported into the binary and the functions that are externally visible and usable.
 
-Function imports are essential for understanding the library functions that are used in the binary. This provides a massive hint into the functionality of the binary.  Use `i`` to list the imports.
+Imports and exports are important for understanding the libraries imported into the binary and the externally visible and usable functions.
+
+Function imports are essential for understanding the library functions used in the binary. This provides a massive hint into the functionality of the binary. Use \`i\`\` to list the imports.
+
 ```nasm
 [0x00000000]> ii
 [Imports]
@@ -219,7 +228,8 @@ nth vaddr      bind   type   lib name
 7   ---------- GLOBAL OBJ        stdout
 ```
 
-Use `iE` to list the exports.  This is useful for understanding the functions that are externally visible and usable.  This is especially useful for understanding the functions that are called from other binaries.
+Use `iE` to list the exports. This is useful for understanding the functions that are externally visible and usable. This is especially useful for understanding the functions that are called from other binaries.
+
 ```nasm
 [0x00000000]> iE
 [Exports]
@@ -246,7 +256,9 @@ nth paddr      vaddr      bind   type   size lib name                    demangl
 ```
 
 ### Strings
-The `iz` submodule is reponsible for finding strings. Based on the help pages for this submodule, we have the following options:
+
+The `iz` submodule is responsible for finding strings. Based on the help pages for this submodule, we have the following options:
+
 ```nasm
 [0x0804923c]> iz?
 | iz[?][j]           strings in data sections (in JSON/Base64)

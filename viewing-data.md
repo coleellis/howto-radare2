@@ -5,10 +5,13 @@ description: Memory and Register Analysis.
 # Viewing Data
 
 ## Summary Information
+
 These commands come from the debugger (`d`) and information (`i`) modules.
 
 ### Viewing Registers
-Use the `dr` submodule to get more information about the registers. 
+
+Use the `dr` submodule to get more information about the registers.
+
 {% hint style="info" %}
 Use `dr?` to view the help pages for this submodule.
 {% endhint %}
@@ -29,7 +32,9 @@ oeax = 0xffffffff
 ```
 
 ### Viewing Memory Segments
+
 Use the `dm` submodule to get more information about the memory segments.
+
 ```nasm
 [0x0804923c]> dm
 0x08048000 - 0x08049000 - usr     4K s r-- /home/joybuzzer/args /home/joybuzzer/args ; segment.ehdr
@@ -55,7 +60,8 @@ Use the `dm` submodule to get more information about the memory segments.
 0xffe2c000 - 0xffe4d000 - usr   132K s rwx [stack] [stack] ; map._stack_.rwx
 ```
 
-We can use the `dm.` command to find the memory segment of a specific address.  It defaults to the seek address if no address is provided.
+We can use the `dm.` command to find the memory segment of a specific address. It defaults to the seek address if no address is provided.
+
 ```nasm
 [0x0804923c]> dm.
 0x08049000 - 0x0804a000 * usr     4K s r-x /home/joybuzzer/args /home/joybuzzer/args ; map._home_joybuzzer_args.r_x
@@ -64,10 +70,12 @@ We can use the `dm.` command to find the memory segment of a specific address.  
 0xffe2c000 - 0xffe4d000 * usr   132K s rwx [stack] [stack] ; map._stack_.rwx
 ```
 
-This submodule provides a number of commands to allocate, deallocate, and map virtual memory. I don't have any writeups using the write flag, but in the future I might make this addition.
+This submodule provides several commands to allocate, deallocate, and map virtual memory. I don't have any writeups using the write flag, but in the future, I might make this addition.
 
 ### Symbols and Variables
+
 Use the `is` command to list the available symbols.
+
 ```nasm
 [0x0804923c]> is
 [Symbols]
@@ -118,7 +126,8 @@ nth paddr      vaddr      bind   type   size lib name                           
 7   ---------- ---------- GLOBAL OBJ    16       imp.stdout
 ```
 
-To get the list of variables, we need to filter for the **objects** in this list.  We can do this using the `~` operator (the `grep` operator).
+To get the list of variables, we need to filter for the **objects** in this list. We can do this using the `~` operator (the `grep` operator).
+
 ```nasm
 [0x0804923c]> is~OBJ
 8   0x00002004 0x0804a004 GLOBAL OBJ    4        _IO_stdin_used
@@ -138,7 +147,7 @@ To get the list of variables, we need to filter for the **objects** in this list
 
 ### Listing Functions
 
-Use the `afl` command to list the available functions.  The `afll` command provides the list of available commands in verbose mode.
+Use the `afl` command to list the available functions. The `afll` command provides the list of available commands in verbose mode.
 
 {% tabs %}
 {% tab title="afl" %}
@@ -190,11 +199,12 @@ address    noret size  nbbs edges    cc cost  min bound range max bound  calls l
 0x08049254     0    4     1     0     1    4 0x08049254     4 0x08049258     0    0      0    2     0 sym.__x86.get_pc_thunk.ax
 0x080491ef     0   77     1     0     1   36 0x080491ef    77 0x0804923c     4    2      0    1    76 sym.read_in
 0x08049000     0   36     3     3     2   19 0x08049000    36 0x08049024     1    0      0    0    12 sym._init
-``` 
+```
 {% endtab %}
 {% endtabs %}
 
 You can use the `aflm` command to list the commands based on the function they're called in.
+
 ```nasm
 [0x0804923c]> aflm
 entry0:
@@ -226,7 +236,8 @@ sym._init:
     sym.__x86.get_pc_thunk.bx
 ```
 
- ## Printing Data
- ### Examining Memory
- ### Searching Memory
- 
+## Printing Data
+
+### Examining Memory
+
+### Searching Memory
