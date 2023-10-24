@@ -1,20 +1,22 @@
-# Information: The i Module
+# Binary Info: The i Module
 
 The Information (`i`) Module is responsible for displaying information about the binary. We make extensive use of the information module when doing **static analysis**.
 
 We will collect the following information using this module:
+
 * Binary Compilation Information
 * Imports and Exports
 * Security Protections
 * Symbols and Strings
 
-These pieces are instrumental to understanding the binary, the underlying source code, and protections in place.
+These pieces are instrumental to understanding the binary, the underlying source code, and the protections in place.
 
 ## Outside Radare2
 
-The Information Module has identical functionality to the `rabin2` library.  More information on `rabin2` can be found [here](../../suite/rabin2.md).
+The Information Module has identical functionality to the `rabin2` library. More information on `rabin2` can be found [here](../../suite/rabin2.md).
 
 ## The Help Page
+
 ```nasm
 [0x00000000]> i?
 Usage: i  Get info from opened file (see rabin2's manpage)

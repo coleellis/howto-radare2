@@ -1,10 +1,11 @@
 # Debugging: The d Module
 
-The Debugging (`d`) Module is used to debug the binary. This module is used to set breakpoints, view registers, and run the binary.  This module drives our **dynamic analysis**. Dynamic analysis is actively running the binary and observing its behavior. This is done by watching the registers, the stack, and the instructions as they are executed.
+The Debugging (`d`) Module is used to debug the binary. This module sets breakpoints, views registers, and runs the binary. This module drives our **dynamic analysis**. Dynamic analysis is actively running the binary and observing its behavior. This is done by watching the registers, the stack, and the instructions as they are executed.
 
 In `radare2`, dynamic analysis is done in **debug mode**. We can enter debug mode by using the `-d` flag when opening a binary.
 
-## The Help Page 
+## The Help Page
+
 ```nasm
 [0x00000000]> d?
 Usage: d   # Debug commands

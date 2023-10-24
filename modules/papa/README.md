@@ -1,8 +1,8 @@
 # Printing: The p Module
 
-The Printing (`p`) Module is responsible for printing memory and data. This module is used to print the disassembly, the hexdump, and the strings. This module is used extensively in both **static** and **dynamic** analysis.
+The Printing (`p`) Module is responsible for printing memory and data. This module prints the disassembly, the hexdump, and the strings. This module is used extensively in both **static** and **dynamic** analysis.
 
-We will use this section to print the contents of registers, the stack, and key addresses throughout execution.  We can control the print formatting to print as hex, decimal, or ASCII.
+We will use this section to print the contents of registers, the stack, and key addresses throughout execution. We can control the print formatting as hex, decimal, or ASCII.
 
 ## The Help Page
 
