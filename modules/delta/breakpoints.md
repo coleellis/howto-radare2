@@ -1,5 +1,7 @@
 # Breakpoints and Watchpoints
 
+Breakpoints and watchpoints are used to pause execution at a specific point in the program. This is useful for debugging and reverse engineering. `radare2` has a number of commands for managing breakpoints and watchpoints.
+
 ## Using Breakpoints
 
 The `db` submodule is responsible for breakpoints. This module allows you to create, delete, and manage breakpoints. We can use `db?` to see the available commands.

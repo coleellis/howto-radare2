@@ -1,5 +1,12 @@
 # Memory Analysis
 
+This section will cover how to view registers, memory segments, and view the heap.
+
+{% hint style="info" %}
+### Stack Analysis
+Stack Analysis is not covered in this section. This is collectively covered in [Printing Data](../papa/README.md) since printing the stack is the same as most other memory.  There is also some information covered in [Visual Mode](../../modes/visual/README.md).
+{% endhint %}
+
 ## Viewing Registers
 
 Use the `dr` submodule to get more information about the registers.
@@ -65,3 +72,43 @@ We can use the `dm.` command to find the memory segment of a specific address. I
 This submodule provides several commands to allocate, deallocate, and map virtual memory. I don't have any writeups using the write flag, but in the future, I might make this addition.
 
 ## Heap Analysis
+
+The `dmh` submodule is responsible for displaying information about the heap. Use `dmh` to show a map of the heap:
+```nasm
+[0x7fae46236ca6]> dmh
+  Malloc chunk @ 0x55a7ecbce250 [size: 0x411][allocated]
+  Top chunk @ 0x55a7ecbce660 - [brk_start: 0x55a7ecbce000, brk_end: 0x55a7ecbef000]
+```
+
+Alternatively, use `dmhg` to get a graph of the heap:
+```nasm
+[0x7fae46236ca6]> dmhg
+Heap Layout
+    .------------------------------------.
+    |    Malloc chunk @ 0x55a7ecbce000   |
+    | size: 0x251                        |
+    |  fd: 0x0, bk: 0x0                  |
+    `------------------------------------'
+        |
+    .---'
+    |
+    |
+  .---------------------------------------------.
+  |    Malloc chunk @ 0x55a7ecbce250            |
+  | size: 0x411                                 |
+  |  fd: 0x57202c6f6c6c6548, bk: 0xa21646c726f  |
+  `---------------------------------------------'
+      |
+  .---'
+  |
+  |
+.----------------------------------------------------.
+|  Top chunk @ 0x55a7ecbce660                        |
+| [brk_start:0x55a7ecbce000, brk_end:0x55a7ecbef000] |
+`----------------------------------------------------'
+```
+
+{% hint style="warning" %}
+### Using `dmhb`
+In order to print linked lists using the `dmhb` command, you must set `dbg.glibc.demangle` to be `true`.
+{% endhint %}
