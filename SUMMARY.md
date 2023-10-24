@@ -6,7 +6,7 @@
 ## Radare2 Modules
 
 * [Seeking: The s Module](modules/sierra/README.md)
-* [Editing Configuration: The e Module](radare2-modules/editing-configuration-the-e-module.md)
+* [Editing Configuration: The e Module](radare2-modules/echo/README.md)
 * [Binary Info: The i Module](modules/india/README.md)
   * [File Information](modules/india/info.md)
   * [Imports and Exports](modules/india/imports-exports.md)
