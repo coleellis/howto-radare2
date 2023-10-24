@@ -1,6 +1,8 @@
 # Imports and Exports
 
-### Imports and Exports
+Imports and exports are useful for understanding the function calls, external libraries imported, and the overall functionality of the binary.
+
+## Imports
 
 Imports and exports are important for understanding the libraries imported into the binary and the externally visible and usable functions.
 
@@ -19,6 +21,8 @@ nth vaddr      bind   type   lib name
 6   ---------- WEAK   NOTYPE     __gmon_start__
 7   ---------- GLOBAL OBJ        stdout
 ```
+
+## Exports
 
 Use `iE` to list the exports. This is useful for understanding the functions that are externally visible and usable. This is especially useful for understanding the functions that are called from other binaries.
 

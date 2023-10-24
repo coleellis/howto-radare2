@@ -8,7 +8,6 @@
 * [Seeking: The s Module](modules/sierra/README.md)
 * [Editing Configuration: The e Module](modules/echo/README.md)
 * [Binary Info: The i Module](modules/india/README.md)
-  * [File Information](modules/india/info.md)
   * [Imports and Exports](modules/india/imports-exports.md)
   * [Checking Security](modules/india/security.md)
   * [Symbols and Strings](modules/india/symbols.md)

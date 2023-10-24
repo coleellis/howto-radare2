@@ -1,6 +1,8 @@
 # Symbols and Strings
 
-### Strings
+Symbols and strings are vital info.  Strings are super telling about the functionality of the binary, and symbols are useful for understanding the variables and functions.
+
+## Strings
 
 The `iz` submodule is responsible for finding strings. Based on the help pages for this submodule, we have the following options:
 
@@ -122,7 +124,7 @@ nth paddr      vaddr      len size section   type    string
 {% endtab %}
 {% endtabs %}
 
-### Symbols and Variables
+## Symbols and Variables
 
 Use the `is` command to list the available symbols.
 
