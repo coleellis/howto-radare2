@@ -1,13 +1,21 @@
+---
+description: Formatting Data written in Memory.
+---
+
 # Printing Data
 
-The printing module is responsible for printing data in various ways. We can print raw data (in either decimal, hex, or other basic types) or disassembly.
+The printing module is responsible for printing data in various ways. We can print raw data (in decimal, hex, or other basic types) or disassembly.
 
-In Von Neumann architecture (the architecture used in most modern computing), the CPU cannot distinguish between data and instructions.  This means we can print any data as either its raw data form or as an instruction.
+In Von Neumann architecture (the architecture used in most modern computing), the CPU cannot distinguish between data and instructions. This means we can print any data as raw data or as an instruction.
 
 ## Printing Raw Data
+
 This section explains how to print raw data from a binary, including hexadecimal, decimal, strings, and other basic data types.
+
 ### Basic Data Types
-There is a long list of basic data types.  You can use `pf??` for the format characters and `pf???` for examples of these types.  The most important types available are:
+
+There is a long list of basic data types. You can use `pf??` for the format characters and `pf???` for examples of these types. The most important types available are:
+
 ```nasm
 Format:
 |  c       char (signed byte)
@@ -23,7 +31,9 @@ Format:
 |  X       show formatted hexpairs
 |  ?       data structure `pf ? (struct_name)example_name`
 ```
+
 Accompanying each type is a corresponding size. You can choose the size of the output. The available sizes are:
+
 ```nasm
 Sizes:
 |  b       byte (unsigned)
@@ -33,7 +43,7 @@ Sizes:
 |  Q       uint128_t (16 bytes)
 ```
 
-Let's look at some examples of this in action.  We most commonly use hexadecimal output and then the size of an address in the binary.  We can also specify the number of bytes to output.
+Let's look at some examples of this in action. We most commonly use hexadecimal output and then the size of an address in the binary. We can also specify the number of bytes to output.
 
 {% hint style="info" %}
 The default number of bytes is rather large. It's recommended to choose an output size. The default is configured so it's easier to examine the stack.
@@ -48,7 +58,8 @@ push ebp
 │  sym.win + 60             0x080491e2      e899feffff     call sym.imp.system ; int system(const char *string)
 ```
 
-We can use `pf` to print format: this prints an address based on the data type.  Here are some examples.
+We can use `pf` to print format: this prints an address based on the data type. Here are some examples.
+
 ```nasm
 [0x0804923c]> pf i
 0x0804923c = -2082109099
@@ -59,16 +70,22 @@ push ebp
 [0x0804923c]> pf D @ sym.win + 60
 call sym.imp.system
 ```
+
 ### Printing Strings
-The `ps` submodule handles the printing of strings.  There are a few formats for printing strings. The most common is to print null-terminated strings.  The `ps` or `psz` command handles this:
+
+The `ps` submodule handles the printing of strings. There are a few formats for printing strings. The most common is to print null-terminated strings. The `ps` or `psz` command handles this:
+
 ```nasm
 [0x0804923c]> ps @ 0x0804a008
 You lose!
 [0x0804923c]> psz @ 0x0804a012
 cat flag.txt
 ```
+
 ### High-Level Language Views
-`radare2` supports a variety of high-level languages.  These languages are used to print data in a more human-readable format.  The most common languages are:
+
+`radare2` supports a variety of high-level languages. These languages are used to print data in a more human-readable format. The most common languages are:
+
 ```nasm
 | pc   C
 | pcd  C dwords (8 byte)
@@ -80,6 +97,7 @@ cat flag.txt
 ```
 
 Here are some examples of this in action:
+
 ```nasm
 [0x0804923c]> pc 4
 #define _BUFFER_SIZE 4
@@ -95,21 +113,27 @@ buf = struct.pack ("4B", *[
 ```
 
 ## Printing Disassembly
-This section involves the printing of assembly code in the binary.  The `pd` submodule is responsible for printing disassembly.
+
+This section involves the printing of assembly code in the binary. The `pd` submodule is responsible for printing disassembly.
 
 There are two pieces to the `pd` submodule:
+
 * `pd`: Disassemble `N` instructions
 * `pD`: Disassemble `N` bytes
 
-We will mostly use `pd` since we are more often interested in disassembling entire instructions rather than bytes.
+We will primarily use `pd` since we are more often interested in disassembling entire instructions rather than bytes.
+
 ### Disassembling Instructions
-The `pd` function is used to print disassembly. It takes a number as an argument, which is the number of instructions to disassemble.
+
+The `pd` function is used to print disassembly. It takes a number as an argument: the number of instructions to disassemble.
+
 ```nasm
 [0x0804923d]> pd 1
 │  main + 1              0x0804923d      89e5           mov ebp, esp
 ```
 
 If you're at the start of a function, it will also print the header:
+
 ```nasm
 [0x0804923c]> pd 1
    main + 0              ; DATA XREFS from entry0 @ 0x80490b0(r), 0x80490b6(w)
@@ -122,7 +146,8 @@ If you're at the start of a function, it will also print the header:
 
 By default, `radare2` chooses to dissect `64` instructions. This bloats all output, so it is recommended to use a more meaningful number.
 
-To disassemble a number of bytes, use `pD`.  By default, this will continue disassembling until an invalid instruction is hit; therefore, you should always input a number of bytes.
+To disassemble a number of bytes, use `pD`. By default, this will continue disassembling until an invalid instruction is hit; therefore, you should always input a number of bytes.
+
 ```pd
 [0x080491f0]> pD 1
 │  sym.read_in + 1              0x080491f0      89             invalid
@@ -130,10 +155,12 @@ To disassemble a number of bytes, use `pD`.  By default, this will continue disa
 │  sym.read_in + 1              0x080491f0      89e5           mov ebp, esp
 ```
 
-The first output isn't helpful to us.  This is why we use `pd` and not `pD` for most disassembling purposes.
+The first output isn't helpful to us. This is why we use `pd` and not `pD` for most disassembling purposes.
 
 ### Disassembling Functions
-To disassemble an entire function, use `pdf`.  This function finds the current function and disassembles the entire function, *no matter where you are inside the function*.
+
+To disassemble an entire function, use `pdf`. This function finds the current function and disassembles the whole function, _no matter where you are inside the function_.
+
 ```nasm
 [0x080491f0]> pdf
    sym.read_in + 0              ; CALL XREF from main @ 0x804924c(x)
@@ -169,6 +196,7 @@ To disassemble an entire function, use `pdf`.  This function finds the current f
 ```
 
 You can use the `@` operator to choose a function to disassemble.
+
 ```nasm
 [0x080491f0]> pdf@main
    main + 0              ; DATA XREFS from entry0 @ 0x80490b0(r), 0x80490b6(w)
@@ -183,8 +211,11 @@ You can use the `@` operator to choose a function to disassemble.
 │  main + 22             0x08049252      c9             leave
 └  main + 23             0x08049253      c3             ret
 ```
+
 ### Disassembly Syntax
-`radare2` supports a variety of assembly syntax.  It defaults to `intel` syntax, but you can change this based on your preference.  Use `e asm.syntax=?` to see the list of options:
+
+`radare2` supports a variety of assembly syntax. It defaults to `intel` syntax, but you can change this based on your preference. Use `e asm.syntax=?` to see the list of options:
+
 ```nasm
 [0x00000000]> e asm.syntax=?
 att
@@ -194,7 +225,8 @@ jz
 regnum
 ```
 
-To switch between AT&T and Intel syntax:
+To switch between AT\&T and Intel syntax:
+
 ```nasm
 [0x00000000]> e asm.syntax = intel
 [0x00000000]> e asm.syntax = att
