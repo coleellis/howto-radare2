@@ -20,6 +20,8 @@
   * [Memory](modules/delta/memory.md)
   * [Running the Binary](modules/delta/running.md)
 * [Printing: The p Module](modules/papa/README.md)
+  * [Printing Data](modules/papa/printing.md)
+  * [Searching: The / Module](modules/papa/searching.md)
 
 ## Display Modes
 
