@@ -71,6 +71,16 @@ push ebp
 call sym.imp.system
 ```
 
+### Telescoping Output
+The `pxr` command is used to print telescoping values.  This resolves addresses to their values and prints them as well. This is useful for resolving return pointers, strings, and other data on the stack.
+```nasm
+[0x0804923c]> pxr 16 @ esp
+0xffa633fc 0xf7c21519  .... @ esp
+0xffa63400 0x00000001  .... 1 .comment
+0xffa63404 0xffa634b4  .4.. [stack] esi stack R W X 'push ebx' '[stack]'
+0xffa63408 0xffa634bc  .4.. [stack] stack R W X 'push 0x7effa649' '[stack]'
+```
+
 ### Printing Strings
 
 The `ps` submodule handles the printing of strings. There are a few formats for printing strings. The most common is to print null-terminated strings. The `ps` or `psz` command handles this:
