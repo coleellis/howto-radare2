@@ -26,7 +26,7 @@
 ## Display Modes
 
 * [Visual Mode](modes/visual/README.md)
-  * [Visual Disassembly](modes/visual/disassembly.md)
+  * [Visual Debugger Mode](modes/visual/debugger.md)
   * [Visual Panels](modes/visual/panels.md)
 * [Graph Mode](modes/graph/README.md)
 
