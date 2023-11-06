@@ -22,6 +22,8 @@ There are five views in Visual mode. These are:
 
 The most useful view is the **Debugger view**. This view shows us the stack, registers, and disassembly. We can move around the binary via seeking and stepping.
 
+Use the `p` command to cycle through the views. Use `P` to cycle through the views in reverse.
+
 {% hint style="info" %}
 #### Debugger View
 
