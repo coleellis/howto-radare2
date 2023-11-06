@@ -33,5 +33,4 @@
 ## The Radare2 Suite
 
 * [Rabin2: File Analysis](suite/rabin2.md)
-* [Ragg2: Code Generation](suite/ragg2.md)
 * [Rafind2: Pattern Matching](suite/rafind2.md)
